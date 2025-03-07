@@ -1,6 +1,7 @@
 # Start skjerm for Rudmon spill.
 import pygame, sys, os
 pygame.init()
+pygame.mixer.init()
 
 SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 assets_dir = os.path.join("assets")
@@ -44,6 +45,10 @@ class Button():
 class Menu:
     def __init__(self):
         self.running = True
+        music_path = os.path.join("assets", "music", "Main_Menu_jingle_Jazz.mp3")
+        pygame.mixer.music.load(music_path)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(0.5)  # Volum (0.0 til 1.0)
     
     def main_menu(self):
         pygame.display.set_caption("Hovedmeny")
@@ -81,6 +86,7 @@ class Menu:
     
     def play(self):
         pygame.display.set_caption("Play")
+        pygame.mixer.music.stop()
         while True:
             SCREEN.fill("black")
             PLAY_MOUSE_POS = pygame.mouse.get_pos()
